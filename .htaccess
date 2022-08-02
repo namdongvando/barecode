@@ -1,0 +1,12 @@
+
+RewriteEngine on
+
+RewriteBase /
+
+RewriteCond %{ENV:REDIRECT_STATUS} ^200
+RewriteRule ^ - [L]
+ 
+RewriteRule .js -  [L] 
+RewriteCond %{HTTPS} off
+RewriteRule (.*) https://%{SERVER_NAME}/$1 [L]
+RewriteRule (.*)  index.html [L]

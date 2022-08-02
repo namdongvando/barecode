@@ -1,0 +1,59 @@
+<html>
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="shortcut icon" href="/public/icon.ico" type="image/x-icon">
+    <title>ScanQRCode</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="manifest" href="/public/mainfet.json">
+    <script src="/public/html5-qrcode.min.js"></script>
+</head>
+
+<body>
+    <div id="qr-reader" style="width:100%;height: auto;margin: auto;"></div>
+    <textarea style="width: 100%;height: 50px;" id="qr-reader-results"></textarea>
+    <div id="error"></div>
+    <div id="countResults"></div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script> 
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script>
+        function docReady(fn) {
+            // see if DOM is already available
+            if (document.readyState === "complete"
+                || document.readyState === "interactive") {
+                // call on next available tick
+                setTimeout(fn, 100);
+            } else {
+                document.addEventListener("DOMContentLoaded", fn);
+            }
+        }
+        docReady(function () {
+            try {
+                var resultContainer = document.getElementById('qr-reader-results');
+                var lastResult, countResults = 0;
+                function onScanSuccess(decodedText, decodedResult) {
+                    if (decodedText !== lastResult) {
+                        ++countResults;
+                        lastResult = decodedText;
+                        // Handle on success condition with the decoded message.
+                        console.log(`Scan result ${decodedText}`, decodedResult);
+                        resultContainer.innerHTML = `${decodedText}`;
+                        countResultsHtml = document.getElementById("countResults");
+                        countResultsHtml.innerHTML = countResults;
+                    }
+                }
+                var html5QrcodeScanner = new Html5QrcodeScanner(
+                    "qr-reader", { fps: 10, qrbox: 250 });
+                html5QrcodeScanner.render(onScanSuccess);
+            } catch (error) {
+                var errorHtml = document.getElementById("error");
+                errorHtml.innerHTML += error;
+            }
+
+        });
+    </script>
+</body>
+
+</html>
