@@ -12,11 +12,34 @@
 </head>
 
 <body>
+
+    <nav class="navbar navbar-default" role="navigation">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/index.html">ScansCode</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- <div class="collapse navbar-collapse navbar-ex1-collapse">
+            <ul class="nav navbar-nav">
+                <li class="active"><a href="index.html">barcode</a></li>
+                <li><a href="index.html">QRCode</a></li>
+            </ul>
+        </div> -->
+    </nav>
+
     <div id="qr-reader" style="width:100%;height: auto;margin: auto;"></div>
+    <label>Nội Dung</label>
     <textarea style="width: 100%;height: 50px;" id="qr-reader-results"></textarea>
     <div id="error"></div>
     <div id="countResults"></div>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script> 
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script>
         function docReady(fn) {
@@ -50,8 +73,7 @@
             } catch (error) {
                 var errorHtml = document.getElementById("error");
                 errorHtml.innerHTML += error;
-            }
-
+            } 
         });
     </script>
 </body>
